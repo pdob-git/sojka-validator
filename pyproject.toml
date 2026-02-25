@@ -17,6 +17,10 @@ classifiers = [
     "License :: OSI",
     "License :: OSI Approved :: Apache Software License",
 ]
+dependencies = [
+    "transformers>=4.30",
+    "torch>=2.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
