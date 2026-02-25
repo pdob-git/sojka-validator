@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sojka_validator"
+version = "0.1.0"
+description = "Sojka validator project"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache 2.0"}
+authors = [
+    {name = "Pawel"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI",
+    "License :: OSI Approved :: Apache Software License",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sojka_validator*"]
