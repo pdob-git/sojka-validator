@@ -18,9 +18,27 @@ It calculates metrics like F1, ROC AUC, PR AUC, precision, recall, and optimizes
 pip install -e ".[dev]"
 ```
 
+## Configuration
+
+Create a `.env` file in the project root with the following variables:
+
+```bash
+MODEL_NAME=speakleash/Bielik-Guard-0.1B-v1.1
+BENCHMARK_DATA=data/full_benchmark.xlsx
+```
+
+- `MODEL_NAME`: HuggingFace model name (e.g., `speakleash/Bielik-Guard-0.1B-v1.1` or `speakleash/Bielik-Guard-0.5B-v1.1`)
+- `BENCHMARK_DATA`: Path to the benchmark Excel file
+
 ## Quick Start
 
 Run benchmark with test data:
+
+```bash
+python -m sojka_validator
+```
+
+Or programmatically:
 
 ```python
 from sojka_validator import run_benchmark
