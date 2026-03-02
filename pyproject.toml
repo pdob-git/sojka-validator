@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sojka_validator"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Sojka validator project"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -26,9 +26,14 @@ dependencies = [
     "python-dotenv>=1.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["sojka_validator*"]
+[tool.setuptools]
+packages = ["sojka_validator"]
+
+[tool.setuptools.package-dir]
+sojka_validator = "src/sojka_validator"
+
+[tool.setuptools.dynamic]
+version = {attr = "sojka_validator.__version__"}
 
 [project.optional-dependencies]
 dev = [
