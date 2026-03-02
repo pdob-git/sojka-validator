@@ -52,7 +52,12 @@ def calculate_fpr(
     Returns:
         False Positive Rate.
     """
-    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    cm = confusion_matrix(y_true, y_pred)
+    if cm.shape == (1, 1):
+        if cm[0, 0] == 0:
+            return 0.0
+        return 0.0 if y_pred.sum() == 0 else 1.0
+    tn, fp, fn, tp = cm.ravel()
     if fp + tn == 0:
         return 0.0
     return float(fp / (fp + tn))
