@@ -29,12 +29,24 @@ def calculate_metrics(
     """
     y_pred = (y_score >= threshold).astype(int)
 
+    unique_labels = np.unique(y_true)
+    has_both_classes = len(unique_labels) == 2
+
+    roc_auc: float
+    pr_auc: float
+    if has_both_classes:
+        roc_auc = float(roc_auc_score(y_true, y_score))
+        pr_auc = float(average_precision_score(y_true, y_score))
+    else:
+        roc_auc = float("nan")
+        pr_auc = float("nan")
+
     return {
         "precision": float(precision_score(y_true, y_pred, zero_division=0)),
         "recall": float(recall_score(y_true, y_pred, zero_division=0)),
         "f1": float(f1_score(y_true, y_pred, zero_division=0)),
-        "roc_auc": float(roc_auc_score(y_true, y_score)),
-        "pr_auc": float(average_precision_score(y_true, y_score)),
+        "roc_auc": roc_auc,
+        "pr_auc": pr_auc,
         "accuracy": float(accuracy_score(y_true, y_pred)),
     }
 
@@ -52,7 +64,7 @@ def calculate_fpr(
     Returns:
         False Positive Rate.
     """
-    cm = confusion_matrix(y_true, y_pred)
+    cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
     if cm.shape == (1, 1):
         if cm[0, 0] == 0:
             return 0.0
